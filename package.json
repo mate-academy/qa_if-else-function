@@ -1,8 +1,8 @@
 {
   "name": "qa_if-else-function",
   "version": "1.0.0",
-  "description": "js task boilerplate",
-  "main": "src/sum.js",
+  "description": "QA if else function",
+  "main": "src/isElse.js",
   "scripts": {
     "init": "mate-scripts init",
     "start": "mate-scripts start",
