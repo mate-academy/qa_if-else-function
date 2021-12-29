@@ -1,5 +1,5 @@
 # QA ifElse function
-Создай функцию `ifElse`, которая принимает 3 колбэка `condition`, `first` и
+Напиши тесты для функции `ifElse`, которая принимает 3 колбэка `condition`, `first` и
 `second` и запускает `condition` без аргументов. Если `condition` вернёт `true`
 запусти `first`, иначе запусти `second` без аргументов. `isElse` не должна
 возвращать результат.
