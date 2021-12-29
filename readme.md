@@ -1,5 +1,5 @@
 # QA ifElse function ([uk](readme.uk.md), [ru](readme.ru.md))
-Create `ifElse` function that takes 3 callbacks `condition`, `first` and
+Write tests for `ifElse` function that takes 3 callbacks `condition`, `first` and
 `second` and runs `condition` with no arguments. If `condition` returns `true`
 run a `first` callback otherwise run `second` with no arguments. No result is
 expected from `isElse` function.
