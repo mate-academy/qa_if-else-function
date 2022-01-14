@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * @param condition
  * @param first
