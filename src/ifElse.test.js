@@ -3,25 +3,25 @@
 describe('ifElse', () => {
   const { ifElse } = require('./ifElse');
 
-  it('should return `first`', () => {
+  it('should return `f1` when condition is true', () => {
     const condition = jest.fn(() => true);
-    const first = jest.fn();
-    const second = jest.fn();
+    const f1 = jest.fn();
+    const f2 = jest.fn();
 
-    ifElse(condition, first, second);
+    ifElse(condition, f1, f2);
 
-    expect(first).toHaveBeenCalled();
-    expect(second).not.toHaveBeenCalled();
+    expect(f1).toHaveBeenCalled();
+    expect(f2).not.toHaveBeenCalled();
   });
 
-  it('should return `second`', () => {
+  it('should return `f2` when condition is false', () => {
     const condition = jest.fn(() => false);
-    const first = jest.fn();
-    const second = jest.fn();
+    const f1 = jest.fn();
+    const f2 = jest.fn();
 
-    ifElse(condition, first, second);
+    ifElse(condition, f1, f2);
 
-    expect(first).not.toHaveBeenCalled();
-    expect(second).toHaveBeenCalled();
+    expect(f1).not.toHaveBeenCalled();
+    expect(f2).toHaveBeenCalled();
   });
 });
