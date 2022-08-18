@@ -3,7 +3,7 @@
 describe('ifElse', () => {
   const { ifElse } = require('./ifElse');
 
-  it('should return `f1` when condition is true', () => {
+  it('should call `f1` when condition is true', () => {
     const condition = jest.fn(() => true);
     const f1 = jest.fn();
     const f2 = jest.fn();
@@ -14,7 +14,7 @@ describe('ifElse', () => {
     expect(f2).not.toHaveBeenCalled();
   });
 
-  it('should return `f2` when condition is false', () => {
+  it('should call `f2` when condition is false', () => {
     const condition = jest.fn(() => false);
     const f1 = jest.fn();
     const f2 = jest.fn();
