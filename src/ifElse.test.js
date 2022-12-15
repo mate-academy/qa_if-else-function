@@ -16,7 +16,7 @@ describe(`'ifElse' function`, () => {
       .toBeInstanceOf(Function);
   });
 
-  it('should run the first callback if the condition returns true', function() {
+  it('should run the first callback if condition returns true', function() {
     const condition = jest.fn(() => true);
 
     ifElse(condition, firstCallback, secondCallback);
@@ -31,7 +31,7 @@ describe(`'ifElse' function`, () => {
       .not.toHaveBeenCalled();
   });
 
-  it('should run the second callback if the condition returns false', function() {
+  it('should run the second callback if condition returns false', function() {
     const condition = jest.fn(() => false);
 
     ifElse(condition, firstCallback, secondCallback);
