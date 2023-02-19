@@ -2,19 +2,19 @@
 
 describe('ifElse', () => {
   const { ifElse } = require('./ifElse');
-  let testA, testB;
+  let conditionMock, firstMock, secondMock;
 
   beforeEach(() => {
-    testA = 0;
-    testB = 0;
+    conditionMock = jest.fn();
+    firstMock = jest.fn();
+    secondMock = jest.fn();
   });
 
-  it('should be declared', () => {
+  it(`should be declared`, () => {
     expect(ifElse).toBeInstanceOf(Function);
   });
 
-  // write tests here
-  it(`shouldn't return an anything`, () => {
+  it(`should not return a value`, () => {
     const result = ifElse(
       () => true,
       () => {},
@@ -25,30 +25,22 @@ describe('ifElse', () => {
   });
 
   it(`should call 'first' function if 'condition' returns true`, () => {
-    ifElse(
-      () => true,
-      () => {
-        testA = 1;
-      },
-      () => {
-        testB = 1;
-      }
-    );
-    expect(testA).toEqual(1);
-    expect(testB).toEqual(0);
+    conditionMock.mockReturnValue(true);
+
+    ifElse(conditionMock, firstMock, secondMock);
+
+    expect(conditionMock).toHaveBeenCalledTimes(1);
+    expect(firstMock).toHaveBeenCalledTimes(1);
+    expect(secondMock).not.toHaveBeenCalled();
   });
 
-  it(`should call 'second' function if 'condition' returns true`, () => {
-    ifElse(
-      () => false,
-      () => {
-        testA = 1;
-      },
-      () => {
-        testB = 1;
-      }
-    );
-    expect(testA).toEqual(0);
-    expect(testB).toEqual(1);
+  it(`should call 'second' function if 'condition' returns false`, () => {
+    conditionMock.mockReturnValue(false);
+
+    ifElse(conditionMock, firstMock, secondMock);
+
+    expect(conditionMock).toHaveBeenCalledTimes(1);
+    expect(firstMock).not.toHaveBeenCalled();
+    expect(secondMock).toHaveBeenCalledTimes(1);
   });
 });
