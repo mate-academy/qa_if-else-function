@@ -29,7 +29,7 @@ describe('ifElse', () => {
     expect(second).toBeCalled();
   });
 
-  it('should run second callback if condition = false', () => {
+  it('should return nothing', () => {
     const condition = () => {
       return false;
     };
