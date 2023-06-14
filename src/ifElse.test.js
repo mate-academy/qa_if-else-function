@@ -40,8 +40,15 @@ describe('ifElse', () => {
   });
 
   it('should pass functions as arguments without executing them', () => {
-    const firstFunction = () => console.log(1);
-    const secondFunction = () => console.log(2);
+    let firstFunctionCalled = false;
+    let secondFunctionCalled = false;
+
+    const firstFunction = () => {
+      firstFunctionCalled = true;
+    };
+    const secondFunction = () => {
+      secondFunctionCalled = true;
+    };
 
     const result = 0;
 
@@ -52,6 +59,8 @@ describe('ifElse', () => {
     );
 
     expect(result).toEqual(0);
+    expect(firstFunctionCalled).toEqual(true);
+    expect(secondFunctionCalled).toEqual(false);
   });
 
   it('should handle null condition', () => {
