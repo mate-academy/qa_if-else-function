@@ -15,12 +15,6 @@ describe('ifElse', () => {
   });
 
   it(`should run first callback if condition returns 'true'`, () => {
-    const condition = jest.fn();
-
-    expect(ifElse(condition, firstCallback, secondCallback)).toBeUndefined();
-  });
-
-  it(`should run first callback if condition returns 'true'`, () => {
     const condition = jest.fn(() => true);
 
     ifElse(condition, firstCallback, secondCallback);
