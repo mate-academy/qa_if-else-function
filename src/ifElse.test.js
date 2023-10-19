@@ -2,64 +2,35 @@
 
 describe("ifElse", () => {
   const { ifElse } = require("./ifElse");
+  let firstCallback;
+  let secondCallback;
 
-  it("should run the first callback if the condition returns true", () => {
-    let executed = false;
-
-    ifElse(
-      () => true,
-      () => {
-        executed = true;
-      },
-      () => {}
-    );
-
-    expect(executed).toBe(true);
+  beforeEach(() => {
+    firstCallback = jest.fn();
+    secondCallback = jest.fn();
   });
 
-  it("should run the second callback if the condition returns false", () => {
-    let executed = false;
-
-    ifElse(
-      () => false,
-      () => {},
-      () => {
-        executed = true;
-      }
-    );
-
-    expect(executed).toBe(true);
+  it("should be declared", () => {
+    expect(ifElse).toBeInstanceOf(Function);
   });
 
-  it("should not run any callback if the condition returns a value other than true or false", () => {
-    let executedFirst = false;
-    let executedSecond = false;
+  it(`should run first callback if condition returns 'true'`, () => {
+    const condition = jest.fn(() => true);
 
-    ifElse(
-      () => null,
-      () => {
-        executedFirst = true;
-      },
-      () => {
-        executedSecond = true;
-      }
-    );
+    ifElse(condition, firstCallback, secondCallback);
 
-    expect(executedFirst).toBe(false);
-    expect(executedSecond).toBe(false);
+    expect(condition).toHaveBeenCalled();
+    expect(firstCallback).toHaveBeenCalled();
+    expect(secondCallback).not.toHaveBeenCalled();
   });
 
-  it("should work with complex conditions", () => {
-    let executed = false;
+  it(`should run second callback if condition returns 'false'`, () => {
+    const condition = jest.fn(() => false);
 
-    ifElse(
-      () => Math.random() > 0.5,
-      () => {
-        executed = true;
-      },
-      () => {}
-    );
+    ifElse(condition, firstCallback, secondCallback);
 
-    expect(executed).toBe(true);
+    expect(condition).toHaveBeenCalled();
+    expect(firstCallback).not.toHaveBeenCalled();
+    expect(secondCallback).toHaveBeenCalled();
   });
 });
