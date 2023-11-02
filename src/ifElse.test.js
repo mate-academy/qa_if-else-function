@@ -4,55 +4,27 @@ describe('ifElse', () => {
   // const { ifElse } = require('./ifElse');
   const { ifElse } = require('./ifElse');
 
-  it('should ', () => {
-    let condition;
-    let first;
-    let second;
+  it('should run the first callback if condition returns true', () => {
+    const condition = jest.fn(() => true);
+    const firstCallback = jest.fn();
+    const secondCallback = jest.fn();
 
-    beforeEach(() => {
-      condition = jest.fn();
-      first = jest.fn();
-      second = jest.fn();
-    });
+    ifElse(condition, firstCallback, secondCallback);
 
-    it('should return undefined', () => {
-      expect(ifElse(condition, first, second)).toBeUndefined();
-    });
+    expect(condition).toHaveBeenCalled();
+    expect(firstCallback).toHaveBeenCalled();
+    expect(secondCallback).not.toHaveBeenCalled();
+  });
 
-    it('should launch condition callback in any case', () => {
-      ifElse(condition, first, second);
+  it('should run the second callback if condition returns false', () => {
+    const condition = jest.fn(() => false);
+    const firstCallback = jest.fn();
+    const secondCallback = jest.fn();
 
-      expect(condition).toHaveBeenCalled();
-    });
+    ifElse(condition, firstCallback, secondCallback);
 
-    it('should launch first if condition returns true', () => {
-      condition = jest.fn(() => true);
-      ifElse(condition, first, second);
-
-      expect(first).toHaveBeenCalled();
-    });
-
-    it('should launch second if condition returns false', () => {
-      condition = jest.fn(() => false);
-      ifElse(condition, first, second);
-
-      expect(second).toHaveBeenCalled();
-    });
-
-    it('should not call first and second at the same time', () => {
-      condition = jest.fn(() => false);
-      ifElse(condition, first, second);
-
-      expect(second).toHaveBeenCalled();
-      expect(first).not.toHaveBeenCalled();
-
-      condition = jest.fn(() => true);
-      first = jest.fn();
-      second = jest.fn();
-      ifElse(condition, first, second);
-
-      expect(first).toHaveBeenCalled();
-      expect(second).not.toHaveBeenCalled();
-    });
+    expect(condition).toHaveBeenCalled();
+    expect(firstCallback).not.toHaveBeenCalled();
+    expect(secondCallback).toHaveBeenCalled();
   });
 });
