@@ -2,13 +2,13 @@
 
 describe('ifElse', () => {
   const { ifElse } = require('./ifElse');
-  let firstCb;
-  let secondCb;
+  let firstCallback;
+  let secondCallback;
   let condition;
 
   beforeEach(() => {
-    firstCb = jest.fn();
-    secondCb = jest.fn();
+    firstCallback = jest.fn();
+    secondCallback = jest.fn();
     condition = jest.fn();
   });
 
@@ -17,30 +17,30 @@ describe('ifElse', () => {
   });
 
   it('should return undefined', () => {
-    expect(ifElse(condition, firstCb, secondCb)).toBeUndefined();
+    expect(ifElse(condition, firstCallback, secondCallback)).toBeUndefined();
   });
 
-  it('should launch condition cb in any case', () => {
-    ifElse(condition, firstCb, secondCb);
+  it('should launch condition Callback in any case', () => {
+    ifElse(condition, firstCallback, secondCallback);
 
     expect(condition).toHaveBeenCalled();
   });
 
-  it('should run first Cb if condition is true', () => {
+  it('should run first Callback if condition is true', () => {
     condition = jest.fn(() => true);
 
-    ifElse(condition, firstCb, secondCb);
+    ifElse(condition, firstCallback, secondCallback);
 
-    expect(firstCb).toHaveBeenCalled();
-    expect(secondCb).not.toHaveBeenCalled();
+    expect(firstCallback).toHaveBeenCalled();
+    expect(secondCallback).not.toHaveBeenCalled();
   });
 
-  it('should run second Cb if condition is false', () => {
+  it('should run second Callback if condition is false', () => {
     condition = jest.fn(() => false);
 
-    ifElse(condition, firstCb, secondCb);
+    ifElse(condition, firstCallback, secondCallback);
 
-    expect(firstCb).not.toHaveBeenCalled();
-    expect(secondCb).toHaveBeenCalled();
+    expect(firstCallback).not.toHaveBeenCalled();
+    expect(secondCallback).toHaveBeenCalled();
   });
 });
