@@ -15,6 +15,11 @@ describe('ifElse', () => {
     secondCallback = jest.fn();
   });
 
+  afterEach(() => {
+    firstCallback.mockReset();
+    secondCallback.mockReset();
+  });
+
   it('should run the first callback if condition returns true', () => {
     const condition = jest.fn(() => true);
 
