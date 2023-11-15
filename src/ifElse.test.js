@@ -7,35 +7,29 @@ describe('ifElse', () => {
     expect(ifElse).toBeInstanceOf(Function);
   });
 
+  let firstCallback;
+  let secondCallback;
+
+  beforeEach(() => {
+    firstCallback = jest.fn();
+    secondCallback = jest.fn();
+  });
+
   it('should run the first callback if condition returns true', () => {
-    let result = 0;
+    const condition = jest.fn(() => true);
 
-    ifElse(
-      () => true,
-      () => {
-        result = 1;
-      },
-      () => {
-        result = 2;
-      }
-    );
+    ifElse(condition, firstCallback, secondCallback);
 
-    expect(result).toBe(1);
+    expect(firstCallback).toHaveBeenCalled();
+    expect(secondCallback).not.toHaveBeenCalled();
   });
 
   it('should run the second callback if condition returns false', () => {
-    let result = 0;
+    const condition = jest.fn(() => false);
 
-    ifElse(
-      () => false,
-      () => {
-        result = 1;
-      },
-      () => {
-        result = 2;
-      }
-    );
+    ifElse(condition, firstCallback, secondCallback);
 
-    expect(result).toBe(2);
+    expect(firstCallback).not.toHaveBeenCalled();
+    expect(secondCallback).toHaveBeenCalled();
   });
 });
