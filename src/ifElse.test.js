@@ -3,6 +3,10 @@
 describe('ifElse', () => {
   const { ifElse } = require('./ifElse');
 
+  it(`should be declared and be an instance of function`, () => {
+    expect(ifElse).toBeInstanceOf(Function);
+  });
+
   it('should run the first callback if condition returns true', () => {
     let result = 0;
 
