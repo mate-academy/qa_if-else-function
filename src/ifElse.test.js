@@ -32,4 +32,10 @@ describe('ifElse', () => {
     expect(firstCallback).not.toHaveBeenCalled();
     expect(secondCallback).toHaveBeenCalled();
   });
+
+  it('should return undefined', () => {
+    const result = ifElse(() => {}, () => {}, () => {});
+
+    expect(result).toBeUndefined();
+  });
 });
