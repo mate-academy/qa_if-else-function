@@ -1,30 +1,29 @@
 'use strict';
 
-const { ifElse } = require("./ifElse");
+const { ifElse } = require('./ifElse');
 
 describe('ifElse', () => {
+  it(`should call first 'callback' when condition is 'true'`, () => {
+    const condition = () => true;
 
-  it('condition = true -> run first callback', () => {
-    const condition = ()=> true;
+    const firstCallback = jest.fn();
+    const secondCallback = jest.fn();
 
-    const first = jest.fn();
-    const second = jest.fn();
+    ifElse(condition, firstCallback, secondCallback);
 
-    ifElse(condition, first, second)
-
-    expect(first).toHaveBeenCalled();
-    expect(second).not.toHaveBeenCalled();
+    expect(firstCallback).toHaveBeenCalled();
+    expect(secondCallback).not.toHaveBeenCalled();
   });
 
-  it('condition = false -> run second callback', () => {
-    const condition = ()=> false;
+  it(`should call second 'callback' when condition is 'false'`, () => {
+    const condition = () => false;
 
-    const first = jest.fn();
-    const second = jest.fn();
+    const firstCallback = jest.fn();
+    const secondCallback = jest.fn();
 
-    ifElse(condition, first, second)
+    ifElse(condition, firstCallback, secondCallback);
 
-    expect(first).not.toHaveBeenCalled();
-    expect(second).toHaveBeenCalled();
+    expect(firstCallback).not.toHaveBeenCalled();
+    expect(secondCallback).toHaveBeenCalled();
   });
 });
