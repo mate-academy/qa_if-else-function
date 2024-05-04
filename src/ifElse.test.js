@@ -18,6 +18,15 @@ describe('ifElse', () => {
     expect(secondCb).not.toHaveBeenCalled();
   });
   
+  it(`should return 'first' without arguments`, () => {
+    const condition = () => true;
+    const firstCb = jest.fn();
+
+    ifElse(condition, firstCb, () => {});
+
+    expect(firstCb).toHaveBeenCalledWith();
+  });
+  
   it(`should return 'second' if 'condition' is false`, () => {
     const condition = () => false;
     const firstCb = jest.fn();
@@ -27,5 +36,26 @@ describe('ifElse', () => {
 
     expect(firstCb).not.toHaveBeenCalled();
     expect(secondCb).toHaveBeenCalled();
+  });
+  
+  it(`should return 'second' without arguments`, () => {
+    const condition = () => false;
+    const secondCb = jest.fn();
+
+    ifElse(condition, () => {}, secondCb);
+
+    expect(secondCb).toHaveBeenCalledWith();
+  });
+  
+  it(`should return condition without arguments`, () => {
+    const condition = jest.fn(() => false);
+
+    ifElse(condition, () => {}, () => {});
+
+    expect(condition).toHaveBeenCalledWith();
+  });
+
+  it('should return nothing', () => {
+    expect(ifElse(() => {}, () => {}, () => {})).toBe();
   });
 });
