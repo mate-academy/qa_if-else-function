@@ -22,11 +22,7 @@ describe('ifElse', () => {
   });
 
   it('should not return anything', () => {
-    const ifElseMock = jest.fn(ifElse);
-
-    ifElseMock(condition, first, second);
-
-    expect(ifElseMock).not.toHaveReturnedTimes(0);
+    expect(ifElse(condition, first, second)).toBeUndefined();
   });
 
   it('should call once only first function if condition is true', () => {
