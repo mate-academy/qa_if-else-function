@@ -3,47 +3,58 @@
 const { ifElse } = require('./ifElse');
 
 describe('ifElse', () => {
-  it('should run the first callback if the condition returns true', () => {
+  it('should call the first callback if the condition returns true', () => {
     const condition = jest.fn(() => true);
-    const first = jest.fn();
-    const second = jest.fn();
+    const firstCallback = jest.fn();
+    const secondCallback = jest.fn();
 
-    ifElse(condition, first, second);
+    ifElse(condition, firstCallback, secondCallback);
 
-    expect(condition).toHaveBeenCalled();
-    expect(first).toHaveBeenCalled();
-    expect(second).not.toHaveBeenCalled();
+    expect(firstCallback).toHaveBeenCalled();
+    expect(secondCallback).not.toHaveBeenCalled();
   });
 
-  it('should run the second callback if the condition returns false', () => {
+  it('should call the second callback if the condition returns false', () => {
     const condition = jest.fn(() => false);
-    const first = jest.fn();
-    const second = jest.fn();
+    const firstCallback = jest.fn();
+    const secondCallback = jest.fn();
 
-    ifElse(condition, first, second);
+    ifElse(condition, firstCallback, secondCallback);
 
-    expect(condition).toHaveBeenCalled();
-    expect(first).not.toHaveBeenCalled();
-    expect(second).toHaveBeenCalled();
+    expect(firstCallback).not.toHaveBeenCalled();
+    expect(secondCallback).toHaveBeenCalled();
   });
 
-  it('should not return any result', () => {
+  it('should not return any result to confirm'
+    + 'it operates by side effects only', () => {
     const condition = jest.fn(() => true);
-    const first = jest.fn();
-    const second = jest.fn();
+    const firstCallback = jest.fn();
+    const secondCallback = jest.fn();
 
-    const result = ifElse(condition, first, second);
+    const result = ifElse(condition, firstCallback, secondCallback);
 
     expect(result).toBeUndefined();
   });
 
-  it('should handle no-operation callbacks correctly', () => {
-    const condition = jest.fn(() => true);
-    const first = jest.fn();
-    const second = jest.fn();
+  it('should handle when condition is an empty function', () => {
+    const condition = jest.fn(() => {});
+    const firstCallback = jest.fn();
+    const secondCallback = jest.fn();
 
-    ifElse(condition, first, second);
+    ifElse(condition, firstCallback, secondCallback);
 
-    expect(first).toHaveBeenCalled();
+    expect(firstCallback).not.toHaveBeenCalled();
+    expect(secondCallback).toHaveBeenCalled();
+  });
+
+  it('should handle non-boolean return values from condition', () => {
+    const condition = jest.fn(() => 'not a boolean');
+    const firstCallback = jest.fn();
+    const secondCallback = jest.fn();
+
+    ifElse(condition, firstCallback, secondCallback);
+
+    expect(firstCallback).not.toHaveBeenCalled();
+    expect(secondCallback).toHaveBeenCalled();
   });
 });
