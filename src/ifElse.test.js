@@ -20,6 +20,10 @@ describe('ifElse', () => {
     expect(ifElse).toBeInstanceOf(Function);
   });
 
+  it('should be truthy', () => {
+    expect(condition).toHaveReturnedWith(true);
+  });
+
   it('should return "Zakharchuk" if condition is truthy', () => {
     expect(first).toHaveBeenCalled();
     expect(first).toHaveReturnedWith('Zakharchuk');
