@@ -1,7 +1,7 @@
 'use strict';
 
 describe('ifElse', () => {
-  const ifElse = require('./ifElse'); // Правильний імпорт функції
+  const ifElse = require('./ifElse'); 
 
   it('should return undefined', () => {
     expect(ifElse(() => {}, () => {}, () => {})).toBeUndefined();
