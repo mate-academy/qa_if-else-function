@@ -13,4 +13,4 @@ function ifElse(condition, first, second) {
   }
 }
 
-module.exports = { ifElse };
+module.exports = ifElse;
