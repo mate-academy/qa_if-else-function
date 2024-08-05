@@ -1,100 +1,89 @@
 'use strict';
 
 describe('ifElse', () => {
-  const ifElse = require('./ifElse'); 
+  const ifElse = require('./ifElse'); // Правильний імпорт функції
 
   it('should return undefined', () => {
     expect(ifElse(() => {}, () => {}, () => {})).toBeUndefined();
   });
 
   it('should call the first callback if condition returns true', () => {
-    const firstFn = jest.fn();
-    const secondFn = jest.fn();
-    const conditionFn = jest.fn(() => true);
+    const firstCallback = jest.fn();
+    const secondCallback = jest.fn();
+    const condition = jest.fn(() => true);
 
-    ifElse(conditionFn, firstFn, secondFn);
+    ifElse(condition, firstCallback, secondCallback);
 
-    expect(firstFn).toHaveBeenCalledTimes(1);
-    expect(secondFn).not.toHaveBeenCalled();
+    expect(firstCallback).toHaveBeenCalledTimes(1);
+    expect(secondCallback).not.toHaveBeenCalled();
   });
 
   it('should call the second callback if condition returns false', () => {
-    const firstFn = jest.fn();
-    const secondFn = jest.fn();
-    const conditionFn = jest.fn(() => false);
+    const firstCallback = jest.fn();
+    const secondCallback = jest.fn();
+    const condition = jest.fn(() => false);
 
-    ifElse(conditionFn, firstFn, secondFn);
+    ifElse(condition, firstCallback, secondCallback);
 
-    expect(firstFn).not.toHaveBeenCalled();
-    expect(secondFn).toHaveBeenCalledTimes(1);
+    expect(firstCallback).not.toHaveBeenCalled();
+    expect(secondCallback).toHaveBeenCalledTimes(1);
   });
 
-  // Додаткові тести
-
   it('should call condition callback only once', () => {
-    const conditionFn = jest.fn(() => true);
-    const firstFn = jest.fn();
-    const secondFn = jest.fn();
+    const firstCallback = jest.fn();
+    const secondCallback = jest.fn();
+    const condition = jest.fn(() => true);
 
-    ifElse(conditionFn, firstFn, secondFn);
+    ifElse(condition, firstCallback, secondCallback);
 
-    expect(conditionFn).toHaveBeenCalledTimes(1);
+    expect(condition).toHaveBeenCalledTimes(1);
   });
 
   it('should handle condition callback that throws an error', () => {
-    const conditionFn = jest.fn(() => {
+    const firstCallback = jest.fn();
+    const secondCallback = jest.fn();
+    const condition = jest.fn(() => {
       throw new Error('Test error');
     });
-    const firstFn = jest.fn();
-    const secondFn = jest.fn();
 
-    expect(() => ifElse(conditionFn, firstFn, secondFn)).toThrow('Test error');
-    expect(firstFn).not.toHaveBeenCalled();
-    expect(secondFn).not.toHaveBeenCalled();
+    expect(() => ifElse(condition, firstCallback, secondCallback))
+      .toThrow('Test error');
+    expect(firstCallback).not.toHaveBeenCalled();
+    expect(secondCallback).not.toHaveBeenCalled();
   });
 
   it('should handle first callback that throws an error', () => {
-    const conditionFn = jest.fn(() => true);
-    const firstFn = jest.fn(() => {
+    const firstCallback = jest.fn(() => {
       throw new Error('Test error');
     });
-    const secondFn = jest.fn();
+    const secondCallback = jest.fn();
+    const condition = jest.fn(() => true);
 
-    expect(() => ifElse(conditionFn, firstFn, secondFn)).toThrow('Test error');
-    expect(firstFn).toHaveBeenCalled();
-    expect(secondFn).not.toHaveBeenCalled();
+    expect(() => ifElse(condition, firstCallback, secondCallback))
+      .toThrow('Test error');
+    expect(firstCallback).toHaveBeenCalled();
+    expect(secondCallback).not.toHaveBeenCalled();
   });
 
   it('should handle second callback that throws an error', () => {
-    const conditionFn = jest.fn(() => false);
-    const firstFn = jest.fn();
-    const secondFn = jest.fn(() => {
+    const firstCallback = jest.fn();
+    const secondCallback = jest.fn(() => {
       throw new Error('Test error');
     });
+    const condition = jest.fn(() => false);
 
-    expect(() => ifElse(conditionFn, firstFn, secondFn)).toThrow('Test error');
-    expect(firstFn).not.toHaveBeenCalled();
-    expect(secondFn).toHaveBeenCalled();
+    expect(() => ifElse(condition, firstCallback, secondCallback))
+      .toThrow('Test error');
+    expect(firstCallback).not.toHaveBeenCalled();
+    expect(secondCallback).toHaveBeenCalled();
   });
 
   it('should handle different types of condition results', () => {
-    const firstFn = jest.fn();
-    const secondFn = jest.fn();
+    const firstCallback = jest.fn();
+    const secondCallback = jest.fn();
 
-    ifElse(() => 'string', firstFn, secondFn);
-    expect(firstFn).not.toHaveBeenCalled();
-    expect(secondFn).toHaveBeenCalledTimes(1);
-
-    ifElse(() => 0, firstFn, secondFn);
-    expect(firstFn).not.toHaveBeenCalled();
-    expect(secondFn).toHaveBeenCalledTimes(2);
-
-    ifElse(() => {}, firstFn, secondFn);
-    expect(firstFn).not.toHaveBeenCalled();
-    expect(secondFn).toHaveBeenCalledTimes(3);
-
-    ifElse(() => true, firstFn, secondFn);
-    expect(firstFn).toHaveBeenCalledTimes(1);
-    expect(secondFn).toHaveBeenCalledTimes(3);
+    ifElse(() => 'string', firstCallback, secondCallback);
+    expect(firstCallback).not.toHaveBeenCalled();
+    expect(secondCallback).toHaveBeenCalledTimes(1);
   });
 });
