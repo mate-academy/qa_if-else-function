@@ -1,13 +1,13 @@
-"use strict";
+'use strict';
 
-describe("ifElse", () => {
-  const { ifElse } = require("./ifElse");
+describe('ifElse', () => {
+  const { ifElse } = require('./ifElse');
 
-  it("should be declared", () => {
+  it('should be declared', () => {
     expect(ifElse).toBeInstanceOf(Function);
   });
 
-  it("should call the first callback when condition returns true", () => {
+  it('should call the first callback when condition returns true', () => {
     const firstCallback = jest.fn();
     const secondCallback = jest.fn();
 
@@ -16,7 +16,7 @@ describe("ifElse", () => {
     expect(secondCallback).not.toHaveBeenCalled();
   });
 
-  it("should call the second callback when condition returns false", () => {
+  it('should call the second callback when condition returns false', () => {
     const firstCallback = jest.fn();
     const secondCallback = jest.fn();
 
@@ -25,11 +25,11 @@ describe("ifElse", () => {
     expect(secondCallback).toHaveBeenCalled();
   });
 
-  it("should return undefined", () => {
+  it('should return undefined', () => {
     const result = ifElse(
       () => Math.random() > 0.5,
-      () => console.log(1),
-      () => console.log(2)
+      () => (1),
+      () => (2)
     );
 
     expect(result).toBeUndefined();
