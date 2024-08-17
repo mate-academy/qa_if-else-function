@@ -1,7 +1,15 @@
 'use strict';
 
-describe('ifElse function', () => {
+describe('ifElse', () => {
   const { ifElse } = require('./ifElse');
+
+  it('should exist', () => {
+    expect(ifElse).toBeInstanceOf(Function);
+  });
+
+  it('should accept 3 arguments', () => {
+    expect(ifElse.length).toBe(3);
+  });
 
   it('should not pass arguments to the callback', () => {
     const fn = jest.fn();
