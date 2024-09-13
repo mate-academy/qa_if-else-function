@@ -53,7 +53,7 @@ describe('ifElse', () => {
     expect(mocks.first).not.toHaveBeenCalled();
   });
 
-  it(`should not call 'first' if 'condition' returns 'true'`, () => {
+  it(`should not call 'second' if 'condition' returns 'true'`, () => {
     mocks.condition.mockReturnValue(true);
     ifElse(mocks.condition, mocks.first, mocks.second);
 
