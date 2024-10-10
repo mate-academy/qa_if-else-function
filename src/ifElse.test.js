@@ -15,14 +15,14 @@ describe('ifElse', () => {
     second = jest.fn(() => {});
   });
 
-  it('should return a first argument if condition returns true', () => {
+  it('should call a first callback if condition returns true', () => {
     ifElse(trueCondition, first, second);
 
     expect(first).toHaveBeenCalled();
     expect(second).not.toHaveBeenCalled();
   });
 
-  it('should return a second argument if condition return false', () => {
+  it('should call a second callback if condition return false', () => {
     ifElse(falseCondition, first, second);
 
     expect(first).not.toHaveBeenCalled();
