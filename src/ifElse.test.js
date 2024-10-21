@@ -16,7 +16,7 @@ describe('ifElse', () => {
     expect(typeof second).toBe('function');
   });
 
-  it('should call second if condition is true', () => {
+  it('should call first if condition is true', () => {
     ifElse(condition, first, second);
 
     expect(condition).toHaveBeenCalled();
