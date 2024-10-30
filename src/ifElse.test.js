@@ -1,4 +1,3 @@
-/* eslint quotes: ["off"] */
 "use strict";
 
 describe("ifElse", () => {
