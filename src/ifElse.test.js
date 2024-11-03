@@ -20,8 +20,8 @@ describe('ifElse', () => {
       .toEqual([true, false, true]);
   });
 
-  it('should call first if true once with value 1'
-    + 'should call second if false twice with value 2', () => {
+  it('should call first once if true once with value 1'
+    + 'should call second twice if false twice with value 2', () => {
     const condition = jest.fn(() => {})
       .mockReturnValueOnce(true)
       .mockReturnValueOnce(false);
