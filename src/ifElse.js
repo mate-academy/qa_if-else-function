@@ -6,10 +6,14 @@
  * @param second
  */
 function ifElse(condition, first, second) {
-  if (condition() === true) {
-    first();
+  if (condition() === true || condition() === false) {
+    if (condition() === true) {
+      first();
+    } else {
+      second();
+    }
   } else {
-    second();
+    return `'condition' returns a non-Boolean value`;
   }
 }
 
