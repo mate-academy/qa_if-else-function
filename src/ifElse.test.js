@@ -4,7 +4,7 @@
 describe('ifElse', () => {
   const { ifElse } = require('./ifElse');
 
-  it(`should call 'f' if first argument is 'true'`, () => {
+  it(`should call 'f' if first argument return 'true'`, () => {
     const f = jest.fn();
     const cb = () => console.log(2);
 
@@ -13,7 +13,7 @@ describe('ifElse', () => {
     expect(f).toHaveBeenCalled();
   });
 
-  it(`should call 'f' if first argument is 'false'`, () => {
+  it(`should call 'f' if first argument return 'false'`, () => {
     const f = jest.fn();
     const cb = () => console.log(1);
 
