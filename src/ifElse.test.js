@@ -1,14 +1,15 @@
 'use strict';
 
 describe('ifElse', () => {
-  const { ifElse } = require('./ifElse');
+  const ifElseModule = require('./ifElse');
+  const {ifElse} = ifElseModule;
   const mockCallback = jest.fn(() => true);
   const mockReturnsOne = jest.fn(() => 1);
   const mockReturnsTwo = jest.fn(() => 2);
-  const spyOnIfElse = jest.spyOn(require('./ifElse'), 'ifElse');
+  const spyOnIfElse = jest.spyOn(ifElseModule, 'ifElse');
 
   afterEach(() => {
-    spyOnIfElse.mockReset();
+    jest.clearAllMocks();
   });
 
   it('should be declared', () => {
@@ -18,7 +19,7 @@ describe('ifElse', () => {
   it('should be called once', () => {
     ifElse(mockCallback, mockReturnsOne, mockReturnsTwo);
 
-    expect(mockCallback.mock.calls.length).toBe(1);
+    expect(mockCallback).toHaveBeenCalledTimes(1);
   });
 
   it('should call mockReturnsTwo if mockCallback is false', () => {
@@ -38,7 +39,7 @@ describe('ifElse', () => {
   });
 
   it('should be called with 3 args', () => {
-    spyOnIfElse(mockCallback, mockReturnsOne, mockReturnsTwo);
+    ifElseModule.ifElse(mockCallback, mockReturnsOne, mockReturnsTwo);
 
     expect(spyOnIfElse)
       .toHaveBeenCalledWith(mockCallback, mockReturnsOne, mockReturnsTwo);
