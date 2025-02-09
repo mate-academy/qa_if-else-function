@@ -2,15 +2,11 @@
 
 describe('ifElse', () => {
   const ifElseModule = require('./ifElse');
-  const {ifElse} = ifElseModule;
+  const { ifElse } = ifElseModule;
   const mockCallback = jest.fn(() => true);
   const mockReturnsOne = jest.fn(() => 1);
   const mockReturnsTwo = jest.fn(() => 2);
   const spyOnIfElse = jest.spyOn(ifElseModule, 'ifElse');
-
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
 
   it('should be declared', () => {
     expect(ifElse).toBeInstanceOf(Function);
