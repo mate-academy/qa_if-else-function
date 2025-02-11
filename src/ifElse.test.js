@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 'use strict';
 
 const { ifElse } = require('./ifElse');
@@ -27,5 +26,4 @@ describe('ifElse', () => {
     expect(firstCallback).not.toHaveBeenCalled();
     expect(secondCallback).toHaveBeenCalled();
   });
-
 });
