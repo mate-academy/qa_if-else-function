@@ -5,11 +5,11 @@
  * @param first
  * @param second
  */
-function ifElse(condition, first, second) {
+function ifElse(condition, firstFunc, secondFunc) {
   if (condition() === true) {
-    first();
+    firstFunc();
   } else {
-    second();
+    secondFunc();
   }
 }
 
