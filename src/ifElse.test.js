@@ -1,7 +1,7 @@
 'use strict';
 
 describe('ifElse', () => {
-  const { ifElse } = require('./ifElse');
+  const { ifElse } = require('./ifElse.js');
 
   it('should run first cb if condition is true ', () => {
     const condition = jest.fn().mockReturnValue(true);
