@@ -12,5 +12,4 @@ function ifElse(condition, first, second) {
     second();
   }
 }
-
 module.exports = { ifElse };
