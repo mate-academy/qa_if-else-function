@@ -10,8 +10,8 @@ describe('ifElse', () => {
 
     ifElse(condition, first, second);
 
-    expect(condition).toHaveBeenCalled();
-    expect(first).toHaveBeenCalled();
+    expect(condition).toHaveBeenCalledWith();
+    expect(first).toHaveBeenCalledWith();
     expect(second).not.toHaveBeenCalled();
   });
 
@@ -22,9 +22,9 @@ describe('ifElse', () => {
 
     ifElse(condition, first, second);
 
-    expect(condition).toHaveBeenCalled();
+    expect(condition).toHaveBeenCalledWith();
     expect(first).not.toHaveBeenCalled();
-    expect(second).toHaveBeenCalled();
+    expect(second).toHaveBeenCalledWith();
   });
 
   it(`should not return any value`, () => {
