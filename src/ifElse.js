@@ -5,8 +5,10 @@
  * @param first
  * @param second
  */
-function ifElse(condition, first, second) {
-  if (condition() === true) {
+function ifElse(condition, first = () => {}, second = () => {}) {
+  const isTruthy = condition();
+
+  if (isTruthy) {
     first();
   } else {
     second();
