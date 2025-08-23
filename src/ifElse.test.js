@@ -29,7 +29,7 @@ describe('ifElse', () => {
     expect(secondMock).not.toHaveBeenCalled();
   });
 
-  it('calls first callback if condition is false', () => {
+  it('calls second callback if condition is false', () => {
     const conditionMock = jest.fn(() => false);
 
     ifElse(conditionMock, firstMock, secondMock);
@@ -38,5 +38,27 @@ describe('ifElse', () => {
     expect(secondMock).toHaveBeenCalled();
   });
 
-  // write tests here
+  it('is called exactly once per invocation', () => {
+    const conditionMock = jest.fn(() => true);
+
+    ifElse(conditionMock, firstMock, secondMock);
+
+    expect(conditionMock).toHaveBeenCalledTimes(1);
+  });
+
+  it('that no arguments are passed to any callback', () => {
+    const conditionMock = jest.fn(() => true);
+
+    ifElse(conditionMock, firstMock, secondMock);
+
+    expect(conditionMock).toHaveBeenCalledWith();
+    expect(firstMock).toHaveBeenCalledWith();
+    expect(secondMock).not.toHaveBeenCalled();
+  });
+
+  it('does not throw when condition returns a boolean', () => {
+    const conditionMock = jest.fn(() => true);
+
+    expect(() => ifElse(conditionMock, firstMock, secondMock)).not.toThrow();
+  });
 });
