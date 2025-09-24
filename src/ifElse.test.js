@@ -21,10 +21,17 @@ describe('ifElse', () => {
 
     const result = ifElse(condition, first, second);
 
+    // Kolejność wywołań
     expect(calls).toEqual(['condition', 'first']);
+    // Wywołania bez argumentów
     expect(condition).toHaveBeenCalledWith();
     expect(first).toHaveBeenCalledWith();
     expect(second).not.toHaveBeenCalled();
+    // Sprawdzenie liczby wywołań
+    expect(condition).toHaveBeenCalledTimes(1);
+    expect(first).toHaveBeenCalledTimes(1);
+    expect(second).toHaveBeenCalledTimes(0);
+    // Funkcja zwraca undefined
     expect(result).toBeUndefined();
   });
 
@@ -45,6 +52,10 @@ describe('ifElse', () => {
     expect(condition).toHaveBeenCalledWith();
     expect(first).not.toHaveBeenCalled();
     expect(second).toHaveBeenCalledWith();
+    // Sprawdzenie liczby wywołań
+    expect(condition).toHaveBeenCalledTimes(1);
+    expect(first).toHaveBeenCalledTimes(0);
+    expect(second).toHaveBeenCalledTimes(1);
     expect(result).toBeUndefined();
   });
 
@@ -72,6 +83,10 @@ describe('ifElse', () => {
     expect(condition).toHaveBeenCalledWith();
     expect(first).toHaveBeenCalledWith();
     expect(second).toHaveBeenCalledWith();
+    // Sprawdzenie liczby wywołań po dwóch wywołaniach
+    expect(condition).toHaveBeenCalledTimes(2);
+    expect(first).toHaveBeenCalledTimes(1);
+    expect(second).toHaveBeenCalledTimes(1);
     expect(result1).toBeUndefined();
     expect(result2).toBeUndefined();
   });
