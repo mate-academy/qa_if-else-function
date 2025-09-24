@@ -3,46 +3,76 @@
 const { ifElse } = require('./ifElse');
 
 describe('ifElse', () => {
-  it('wywołuje pierwszą funkcję, gdy condition zwraca true', () => {
-    const condition = jest.fn(() => true);
-    const first = jest.fn();
-    const second = jest.fn();
+  // 1.1 Sprawdzenie arności funkcji
+  it('ma dokładnie 3 argumenty (arity = 3)', () => {
+    expect(ifElse.length).toBe(3);
+  });
 
-    ifElse(condition, first, second);
+  it('wywołuje pierwszą funkcję, gdy condition zwraca true, '
+     + 'z zachowaniem kolejności i bez argumentów', () => {
+    const calls = [];
+    const condition = jest.fn(() => {
+      calls.push('condition');
 
-    // Sprawdzamy, czy condition zostało wywołane
-    expect(condition).toHaveBeenCalled();
-    // Pierwsza funkcja powinna zostać wywołana
-    expect(first).toHaveBeenCalled();
-    // Druga funkcja nie powinna zostać wywołana
+      return true;
+    });
+    const first = jest.fn(() => calls.push('first'));
+    const second = jest.fn(() => calls.push('second'));
+
+    const result = ifElse(condition, first, second);
+
+    expect(calls).toEqual(['condition', 'first']);
+    expect(condition).toHaveBeenCalledWith();
+    expect(first).toHaveBeenCalledWith();
     expect(second).not.toHaveBeenCalled();
+    expect(result).toBeUndefined();
   });
 
-  it('wywołuje drugą funkcję, gdy condition zwraca false', () => {
-    const condition = jest.fn(() => false);
-    const first = jest.fn();
-    const second = jest.fn();
+  it('wywołuje drugą funkcję, gdy condition zwraca false, '
+     + 'z zachowaniem kolejności i bez argumentów', () => {
+    const calls = [];
+    const condition = jest.fn(() => {
+      calls.push('condition');
 
-    ifElse(condition, first, second);
+      return false;
+    });
+    const first = jest.fn(() => calls.push('first'));
+    const second = jest.fn(() => calls.push('second'));
 
-    expect(condition).toHaveBeenCalled();
+    const result = ifElse(condition, first, second);
+
+    expect(calls).toEqual(['condition', 'second']);
+    expect(condition).toHaveBeenCalledWith();
     expect(first).not.toHaveBeenCalled();
-    expect(second).toHaveBeenCalled();
+    expect(second).toHaveBeenCalledWith();
+    expect(result).toBeUndefined();
   });
 
-  it('poprawnie działa przy wielokrotnych wywołaniach', () => {
+  it('poprawnie działa przy wielokrotnych wywołaniach, '
+     + 'z zachowaniem kolejności i bez argumentów', () => {
+    const calls = [];
     const condition = jest.fn()
-      .mockReturnValueOnce(true)
-      .mockReturnValueOnce(false);
-    const first = jest.fn();
-    const second = jest.fn();
+      .mockImplementationOnce(() => {
+        calls.push('condition1');
 
-    // pierwsze wywołanie: condition = true
-    ifElse(condition, first, second);
-    // drugie wywołanie: condition = false
-    ifElse(condition, first, second);
+        return true;
+      })
+      .mockImplementationOnce(() => {
+        calls.push('condition2');
 
-    expect(first).toHaveBeenCalledTimes(1);
-    expect(second).toHaveBeenCalledTimes(1);
+        return false;
+      });
+    const first = jest.fn(() => calls.push('first'));
+    const second = jest.fn(() => calls.push('second'));
+
+    const result1 = ifElse(condition, first, second);
+    const result2 = ifElse(condition, first, second);
+
+    expect(calls).toEqual(['condition1', 'first', 'condition2', 'second']);
+    expect(condition).toHaveBeenCalledWith();
+    expect(first).toHaveBeenCalledWith();
+    expect(second).toHaveBeenCalledWith();
+    expect(result1).toBeUndefined();
+    expect(result2).toBeUndefined();
   });
 });
