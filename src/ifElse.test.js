@@ -3,8 +3,9 @@
 describe('ifElse', () => {
   const { ifElse } = require('./ifElse');
 
-  it('should be declared', () => {
+  it('should be declared and accept exactly 3 arguments', () => {
     expect(ifElse).toBeInstanceOf(Function);
+    expect(ifElse.length).toBe(3);
   });
 
   it('should call the first callback if condition returns true', () => {
@@ -12,8 +13,9 @@ describe('ifElse', () => {
     const first = jest.fn();
     const second = jest.fn();
 
-    ifElse(condition, first, second);
+    const result = ifElse(condition, first, second);
 
+    expect(result).toBeUndefined();
     expect(condition).toHaveBeenCalledTimes(1);
     expect(condition).toHaveBeenCalledWith();
     expect(first).toHaveBeenCalledTimes(1);
@@ -26,8 +28,9 @@ describe('ifElse', () => {
     const first = jest.fn();
     const second = jest.fn();
 
-    ifElse(condition, first, second);
+    const result = ifElse(condition, first, second);
 
+    expect(result).toBeUndefined();
     expect(condition).toHaveBeenCalledTimes(1);
     expect(condition).toHaveBeenCalledWith();
     expect(first).not.toHaveBeenCalled();
@@ -40,44 +43,35 @@ describe('ifElse', () => {
     const first = jest.fn();
     const second = jest.fn();
 
-    ifElse(condition, first, second);
+    const result = ifElse(condition, first, second);
 
+    expect(result).toBeUndefined();
     expect(condition).toHaveBeenCalledWith();
     expect(first).toHaveBeenCalledWith();
     expect(second).not.toHaveBeenCalled();
   });
 
   it('should treat any non-true value as false', () => {
-    const falsyConditions = [
+    const nonTrueConditions = [
       () => 1,
       () => 'true',
       () => undefined,
       () => null,
     ];
 
-    for (const cond of falsyConditions) {
+    for (const condFactory of nonTrueConditions) {
+      const cond = jest.fn(condFactory);
       const first = jest.fn();
       const second = jest.fn();
 
-      ifElse(cond, first, second);
+      const result = ifElse(cond, first, second);
 
+      expect(result).toBeUndefined();
+      expect(cond).toHaveBeenCalledTimes(1);
+      expect(cond).toHaveBeenCalledWith();
       expect(first).not.toHaveBeenCalled();
+      expect(second).toHaveBeenCalledTimes(1);
       expect(second).toHaveBeenCalledWith();
     }
-  });
-
-  it('should execute exactly one callback when condition is random', () => {
-    const condition = jest.fn(() => Math.random() > 0.5);
-    const first = jest.fn();
-    const second = jest.fn();
-
-    ifElse(condition, first, second);
-
-    expect(condition).toHaveBeenCalledTimes(1);
-    expect(condition).toHaveBeenCalledWith();
-
-    const totalCalls =
-      first.mock.calls.length + second.mock.calls.length;
-    expect(totalCalls).toBe(1);
   });
 });
