@@ -15,7 +15,9 @@ describe('ifElse', () => {
     ifElse(condition, first, second);
 
     expect(condition).toHaveBeenCalledTimes(1);
+    expect(condition).toHaveBeenCalledWith();
     expect(first).toHaveBeenCalledTimes(1);
+    expect(first).toHaveBeenCalledWith();
     expect(second).not.toHaveBeenCalled();
   });
 
@@ -27,19 +29,41 @@ describe('ifElse', () => {
     ifElse(condition, first, second);
 
     expect(condition).toHaveBeenCalledTimes(1);
+    expect(condition).toHaveBeenCalledWith();
     expect(first).not.toHaveBeenCalled();
     expect(second).toHaveBeenCalledTimes(1);
+    expect(second).toHaveBeenCalledWith();
   });
 
-  it('should call callbacks with no arguments', () => {
+  it('should call callbacks and condition with no arguments', () => {
     const condition = jest.fn(() => true);
     const first = jest.fn();
     const second = jest.fn();
 
     ifElse(condition, first, second);
 
+    expect(condition).toHaveBeenCalledWith();
     expect(first).toHaveBeenCalledWith();
     expect(second).not.toHaveBeenCalled();
+  });
+
+  it('should treat any non-true value as false', () => {
+    const falsyConditions = [
+      () => 1,
+      () => 'true',
+      () => undefined,
+      () => null,
+    ];
+
+    for (const cond of falsyConditions) {
+      const first = jest.fn();
+      const second = jest.fn();
+
+      ifElse(cond, first, second);
+
+      expect(first).not.toHaveBeenCalled();
+      expect(second).toHaveBeenCalledWith();
+    }
   });
 
   it('should execute exactly one callback when condition is random', () => {
@@ -49,7 +73,11 @@ describe('ifElse', () => {
 
     ifElse(condition, first, second);
 
-    const totalCalls = first.mock.calls.length + second.mock.calls.length;
+    expect(condition).toHaveBeenCalledTimes(1);
+    expect(condition).toHaveBeenCalledWith();
+
+    const totalCalls =
+      first.mock.calls.length + second.mock.calls.length;
     expect(totalCalls).toBe(1);
   });
 });
