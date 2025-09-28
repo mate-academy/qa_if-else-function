@@ -8,11 +8,17 @@ describe('ifElse', () => {
     const first = jest.fn();
     const second = jest.fn();
 
-    ifElse(condition, first, second);
+    const result = ifElse(condition, first, second);
 
-    expect(condition).toHaveBeenCalled();
-    expect(first).toHaveBeenCalled();
-    expect(second).not.toHaveBeenCalled();
+    expect(result).toBeUndefined();
+
+    expect(condition).toHaveBeenCalledTimes(1);
+    expect(condition).toHaveBeenCalledWith();
+
+    expect(first).toHaveBeenCalledTimes(1);
+    expect(first).toHaveBeenCalledWith();
+
+    expect(second).toHaveBeenCalledTimes(0);
   });
 
   it('should run 2nd callback if condition is false', () => {
@@ -20,10 +26,16 @@ describe('ifElse', () => {
     const first = jest.fn();
     const second = jest.fn();
 
-    ifElse(condition, first, second);
+    const result = ifElse(condition, first, second);
 
-    expect(condition).toHaveBeenCalled();
-    expect(first).not.toHaveBeenCalled();
-    expect(second).toHaveBeenCalled();
+    expect(result).toBeUndefined();
+
+    expect(condition).toHaveBeenCalledTimes(1);
+    expect(condition).toHaveBeenCalledWith();
+
+    expect(first).toHaveBeenCalledTimes(0);
+
+    expect(second).toHaveBeenCalledTimes(1);
+    expect(second).toHaveBeenCalledWith();
   });
 });
