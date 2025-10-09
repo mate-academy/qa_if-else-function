@@ -15,7 +15,9 @@ describe('ifElse', () => {
     ifElse(condition, first, second);
 
     expect(condition).toHaveBeenCalledTimes(1);
+    expect(condition).toHaveBeenCalledWith();
     expect(first).toHaveBeenCalledTimes(1);
+    expect(first).toHaveBeenCalledWith();
     expect(second).not.toHaveBeenCalled();
   });
 
@@ -27,8 +29,10 @@ describe('ifElse', () => {
     ifElse(condition, first, second);
 
     expect(condition).toHaveBeenCalledTimes(1);
+    expect(condition).toHaveBeenCalledWith();
     expect(first).not.toHaveBeenCalled();
     expect(second).toHaveBeenCalledTimes(1);
+    expect(second).toHaveBeenCalledWith();
   });
 
   it('should not return any value', () => {
