@@ -1,12 +1,12 @@
 'use strict';
 
 /**
- * @param condition
- * @param first
- * @param second
+ * @param {Function} condition
+ * @param {Function} first
+ * @param {Function} second
  */
 function ifElse(condition, first, second) {
-  if (condition() === true) {
+  if (condition()) {
     first();
   } else {
     second();
