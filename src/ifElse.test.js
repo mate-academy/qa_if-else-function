@@ -23,8 +23,9 @@ describe(`ifElse`, () => {
     expect(count).toBe(1);
   });
 
-  it(`if function returns a 'truthy' the first function must be called`, () => {
-    const condition = () => Boolean(1);
+  it(`if function returns a 'truthy'
+  the second function must be called`, () => {
+    const condition = () => "hello";
     let count = null;
 
     const first = () => {
@@ -36,7 +37,7 @@ describe(`ifElse`, () => {
     };
 
     ifElse(condition, first, second);
-    expect(count).toBe(1);
+    expect(count).toBe(2);
   });
 
   it(`the second function must be called`, () => {
