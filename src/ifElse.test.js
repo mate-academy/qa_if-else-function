@@ -23,6 +23,22 @@ describe(`ifElse`, () => {
     expect(count).toBe(1);
   });
 
+  it(`if function returns a 'truthy' the first function must be called`, () => {
+    const condition = () => Boolean(1);
+    let count = null;
+
+    const first = () => {
+      count = 1;
+    };
+
+    const second = () => {
+      count = 2;
+    };
+
+    ifElse(condition, first, second);
+    expect(count).toBe(1);
+  });
+
   it(`the second function must be called`, () => {
     const condition = () => false;
     let count = null;
