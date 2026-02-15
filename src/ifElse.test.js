@@ -20,19 +20,25 @@ describe('ifElse', () => {
   it('should call first if condition returns true', () => {
     const condition = jest.fn().mockReturnValue(true);
     const first = jest.fn();
+    const second = jest.fn();
 
-    ifElse(condition, first, jest.fn());
+    ifElse(condition, first, second);
 
     expect(first).toHaveBeenCalledTimes(1);
+    expect(first).toHaveBeenCalledWith();
+    expect(second).not.toHaveBeenCalled()
   });
 
   it('should call second if condition returns false', () => {
     const condition = jest.fn().mockReturnValue(false);
+    const first = jest.fn();
     const second = jest.fn();
 
-    ifElse(condition, jest.fn(), second);
+    ifElse(condition, first, second);
 
     expect(second).toHaveBeenCalledTimes(1);
+    expect(second).toHaveBeenCalledWith();
+    expect(first).not.toHaveBeenCalled();
   });
 
   it('should ifElse returns nothing', () => {
