@@ -12,6 +12,7 @@ describe('ifElse', () => {
     expect(condition).toHaveBeenCalledTimes(1);
     expect(condition).toHaveBeenCalledWith();
     expect(first).toHaveBeenCalledTimes(1);
+    expect(first).toHaveBeenCalledWith();
     expect(second).not.toHaveBeenCalled();
     expect(result).toBeUndefined();
   });
@@ -21,10 +22,11 @@ describe('ifElse', () => {
     const first = jest.fn();
     const second = jest.fn();
 
-    ifElse(condition, first, second);
+    const result = ifElse(condition, first, second);
 
     expect(condition).toHaveBeenCalledTimes(1);
     expect(first).not.toHaveBeenCalled();
     expect(second).toHaveBeenCalledTimes(1);
+    expect(result).toBeUndefined();
   });
 });
