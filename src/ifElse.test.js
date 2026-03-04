@@ -21,8 +21,8 @@ describe('ifElse', () => {
     const second = jest.fn();
 
     ifElse(condition, first, second);
-    expect(first).toHaveBeenCalled();
-    expect(second).not.toHaveBeenCalled();
+    expect(first).toHaveBeenCalledWith();
+    expect(second).not.toHaveBeenCalledWith();
   });
 
   it('should call second callback if condition is false', () => {
@@ -31,7 +31,7 @@ describe('ifElse', () => {
     const second = jest.fn();
 
     ifElse(condition, first, second);
-    expect(second).toHaveBeenCalled();
-    expect(first).not.toHaveBeenCalled();
+    expect(first).not.toHaveBeenCalledWith();
+    expect(second).toHaveBeenCalledWith();
   });
 });
