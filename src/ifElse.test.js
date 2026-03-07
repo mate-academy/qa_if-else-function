@@ -3,14 +3,15 @@
 const { ifElse } = require('./ifElse');
 
 describe('ifElse', () => {
-  test('should call condition callback', () => {
+  test('should call condition with no arguments', () => {
     const condition = jest.fn(() => true);
     const first = jest.fn();
     const second = jest.fn();
 
-    ifElse(condition, first, second);
+    const result = ifElse(condition, first, second);
 
-    expect(condition).toHaveBeenCalled();
+    expect(condition).toHaveBeenCalledWith();
+    expect(result).toBeUndefined();
   });
 
   test('should call first callback if condition returns true', () => {
@@ -18,10 +19,12 @@ describe('ifElse', () => {
     const first = jest.fn();
     const second = jest.fn();
 
-    ifElse(condition, first, second);
+    const result = ifElse(condition, first, second);
 
-    expect(first).toHaveBeenCalled();
+    expect(first).toHaveBeenCalledWith();
+    expect(first).toHaveBeenCalledTimes(1);
     expect(second).not.toHaveBeenCalled();
+    expect(result).toBeUndefined();
   });
 
   test('should call second callback if condition returns false', () => {
@@ -29,20 +32,11 @@ describe('ifElse', () => {
     const first = jest.fn();
     const second = jest.fn();
 
-    ifElse(condition, first, second);
+    const result = ifElse(condition, first, second);
 
-    expect(second).toHaveBeenCalled();
+    expect(second).toHaveBeenCalledWith();
+    expect(second).toHaveBeenCalledTimes(1);
     expect(first).not.toHaveBeenCalled();
-  });
-
-  test('should call only one callback depending on condition', () => {
-    const condition = jest.fn(() => true);
-    const first = jest.fn();
-    const second = jest.fn();
-
-    ifElse(condition, first, second);
-
-    expect(first).toHaveBeenCalledTimes(1);
-    expect(second).toHaveBeenCalledTimes(0);
+    expect(result).toBeUndefined();
   });
 });
