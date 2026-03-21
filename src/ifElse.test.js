@@ -63,4 +63,9 @@ describe('ifElse', () => {
     ifElse(falsyCondition, first, second);
     expect(second).toHaveBeenLastCalledWith();
   });
+
+  it('should invoke condition without any args', () => {
+    ifElse(truthyCondition, first, second);
+    expect(truthyCondition).toHaveBeenCalledWith();
+  });
 });
