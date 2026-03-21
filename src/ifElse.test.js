@@ -55,4 +55,12 @@ describe('ifElse', () => {
       ifElse(undefined, first, second);
     }).toThrow();
   });
+
+  it('should invoke first or second functions without args', () => {
+    ifElse(truthyCondition, first, second);
+    expect(first).toHaveBeenCalledWith();
+
+    ifElse(falsyCondition, first, second);
+    expect(second).toHaveBeenLastCalledWith();
+  });
 });
