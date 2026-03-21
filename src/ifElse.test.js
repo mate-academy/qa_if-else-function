@@ -41,9 +41,9 @@ describe('ifElse', () => {
   });
 
   it('should invoke one of functions in any case', () => {
-    falsyCondition.mockReturnValue(!!(Math.random() > 0.5));
+    const randomCondition = jest.fn().mockReturnValue(!!(Math.random() > 0.5));
 
-    ifElse(falsyCondition, first, second);
+    ifElse(randomCondition, first, second);
 
     const totalCalls = first.mock.calls.length + second.mock.calls.length;
 
