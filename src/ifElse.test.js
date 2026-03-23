@@ -39,5 +39,17 @@ describe('ifElse', () => {
 
     expect(condition.mock.calls[0]).toHaveLength(0);
     expect(first.mock.calls[0]).toHaveLength(0);
+
+    condition.mockReturnValue(false);
+    ifElse(condition, first, second);
+
+    expect(condition.mock.calls[1]).toHaveLength(0);
+    expect(second.mock.calls[0]).toHaveLength(0);
+  });
+
+  it('should return undefined', () => {
+    condition.mockReturnValue(true);
+
+    expect(ifElse(condition, first, second)).toBeUndefined();
   });
 });
