@@ -10,7 +10,7 @@ describe('ifElse', () => {
 
   it(`should call second if condition is false`, () => {
     let result = 0;
-    const condition = () => Math.PI < 0.5;
+    const condition = () => Math.PI < 0.4;
     const first = () => result = 1;
     const second = () => result = 2;
     ifElse(condition, first, second)
