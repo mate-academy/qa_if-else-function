@@ -33,7 +33,7 @@ describe('ifElse', () => {
     ifElse(condition, first, second);
 
     expect(condition).toHaveBeenCalledTimes(1);
-    expect(condition.mock.calls[0].length.toBe(0));
+    expect(condition.mock.calls[0].length).toBe(0);
   });
 
   it('should call one callback', () => {
