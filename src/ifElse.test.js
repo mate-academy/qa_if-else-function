@@ -30,7 +30,7 @@ describe('ifElse', () => {
     expect(first).not.toHaveBeenCalled();
   });
 
-  it('should call the second callback if the condition returns a truthy non-boolean value', () => {
+  it('should call 2 cb if condition returns truthy non-boolean val', () => {
     condition = jest.fn(() => 1);
 
     ifElse(condition, first, second);
