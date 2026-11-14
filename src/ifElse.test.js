@@ -11,7 +11,9 @@ describe('ifElse', () => {
     const result = ifElse(condition, first, second);
 
     expect(condition).toHaveBeenCalledTimes(1);
+    expect(condition).toHaveBeenCalledWith();
     expect(first).toHaveBeenCalledTimes(1);
+    expect(first).toHaveBeenCalledWith();
     expect(second).not.toHaveBeenCalled();
     expect(result).toBeUndefined();
   });
@@ -24,8 +26,10 @@ describe('ifElse', () => {
     const result = ifElse(condition, first, second);
 
     expect(condition).toHaveBeenCalledTimes(1);
+    expect(condition).toHaveBeenCalledWith();
     expect(first).not.toHaveBeenCalled();
     expect(second).toHaveBeenCalledTimes(1);
+    expect(second).toHaveBeenCalledWith();
     expect(result).toBeUndefined();
   });
 
@@ -39,8 +43,10 @@ describe('ifElse', () => {
 
       ifElse(condition, first, second);
 
+      expect(condition).toHaveBeenCalledWith();
       expect(first).not.toHaveBeenCalled();
       expect(second).toHaveBeenCalledTimes(1);
+      expect(second).toHaveBeenCalledWith();
     },
   );
 });
