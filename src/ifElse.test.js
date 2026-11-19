@@ -3,27 +3,27 @@
 describe('ifElse', () => {
   const { ifElse } = require('./ifElse');
 
-  it('should ', () => {});
-
   it('correct result', () => {
-    const condition = () => true;
+    const condition = jest.fn(() => true);
     const first = jest.fn();
     const second = jest.fn();
 
     ifElse(condition, first, second);
 
-    expect(first).toHaveBeenCalled();
+    expect(condition).toHaveBeenCalledWith();
+    expect(first).toHaveBeenCalledWith();
     expect(second).not.toHaveBeenCalled();
   });
 
   it('incorrect result', () => {
-    const condition = () => false;
+    const condition = jest.fn(() => false);
     const first = jest.fn();
     const second = jest.fn();
 
     ifElse(condition, first, second);
 
     expect(first).not.toHaveBeenCalled();
-    expect(second).toHaveBeenCalled();
+    expect(second).toHaveBeenCalledWith();
+    expect(condition).toHaveBeenCalledWith();
   });
 });
