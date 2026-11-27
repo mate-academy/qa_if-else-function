@@ -12,11 +12,14 @@ describe('ifElse', () => {
 
     const second = jest.fn();
 
-    const condition = () => true;
+    const condition = jest.fn(() => true);
 
     ifElse(condition, first, second);
-    expect(first.mock.calls.length).toBe(1);
-    expect(second.mock.calls.length).toBe(0);
+    expect(first).toHaveBeenCalledTimes(1);
+    expect(first).toHaveBeenCalledWith();
+    expect(second).not.toHaveBeenCalled();
+    expect(condition).toHaveBeenCalledWith();
+    expect(condition).toHaveBeenCalledTimes(1);
   });
 
   it('should call second call back if condition is false ', () => {
@@ -24,10 +27,13 @@ describe('ifElse', () => {
 
     const second = jest.fn();
 
-    const condition = () => false;
+    const condition = jest.fn(() => false);
 
     ifElse(condition, first, second);
-    expect(first.mock.calls.length).toBe(0);
-    expect(second.mock.calls.length).toBe(1);
+    expect(first).not.toHaveBeenCalled();
+    expect(second).toHaveBeenCalledTimes(1);
+    expect(condition).toHaveBeenCalledWith();
+    expect(second).toHaveBeenCalledWith();
+    expect(condition).toHaveBeenCalledTimes(1);
   });
 });
